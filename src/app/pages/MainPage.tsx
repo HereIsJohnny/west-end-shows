@@ -22,12 +22,12 @@ const MainPageComponent: React.FunctionComponent<MainPageStateProps & MainPageDi
   searchQuery,
   onSearchChange,
 }) => (
-  <div>
+  <React.Fragment>
     <Search onChange={onSearchChange} query={searchQuery} />
     <Container>
       <MoviesList movies={movies} searchQuery={searchQuery} />
     </Container>
-  </div>
+  </React.Fragment>
 )
 
 const mapStateToProps = (state: RootState): MainPageStateProps => ({
