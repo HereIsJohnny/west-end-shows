@@ -15,6 +15,7 @@ import { Movie } from 'app/store/movies/reducer'
 import Fuse from 'fuse.js'
 import React, { useMemo } from 'react'
 import { SEARCH_CONFIG } from '../Search/config'
+import { Link } from 'react-router-dom'
 
 interface MoviesListProps {
   movies: Movie[]
@@ -23,7 +24,10 @@ interface MoviesListProps {
 
 export const MoviesList: React.FunctionComponent<MoviesListProps> = ({ movies, searchQuery }) => {
   const filteredMovies = useMemo(
-    () => (searchQuery ? new Fuse(movies, SEARCH_CONFIG).search(searchQuery) : movies),
+    () =>
+      searchQuery && searchQuery.length > 3
+        ? new Fuse(movies, SEARCH_CONFIG).search(searchQuery)
+        : movies,
     [movies, searchQuery]
   )
   return (
@@ -36,8 +40,9 @@ export const MoviesList: React.FunctionComponent<MoviesListProps> = ({ movies, s
 }
 
 const useStyles = makeStyles({
-  button: {
+  link: {
     marginLeft: 'auto',
+    textDecoration: 'none',
   },
   media: {
     height: 140,
@@ -51,7 +56,6 @@ const MovieCard: React.FunctionComponent<{ movie: Movie }> = ({ movie }) => {
   const classes = useStyles()
   const theme = useTheme()
   const isMd = useMediaQuery(theme.breakpoints.up('md'))
-
   return (
     <Box mt={4} mb={4}>
       <Card>
@@ -76,9 +80,11 @@ const MovieCard: React.FunctionComponent<{ movie: Movie }> = ({ movie }) => {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button className={classes.button} size='large' color='primary'>
-                Get tickets
-              </Button>
+              <Link className={classes.link} to={`/movie/${movie.id}`}>
+                <Button size='large' color='primary'>
+                  Get tickets
+                </Button>
+              </Link>
             </CardActions>
           </Grid>
         </Grid>

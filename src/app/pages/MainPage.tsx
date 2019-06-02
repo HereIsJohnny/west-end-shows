@@ -1,7 +1,7 @@
 import { Container } from '@material-ui/core'
 import { MoviesList } from 'app/components/MoviesList/MoviesList'
 import { Search } from 'app/components/Search/Search'
-import { Movie, MoviesState } from 'app/store/movies/reducer'
+import { Movie } from 'app/store/movies/reducer'
 import { RootState } from 'app/store/rootReducer'
 import { updateSearchQuery } from 'app/store/search/actions'
 import React from 'react'
