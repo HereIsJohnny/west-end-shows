@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { getMovies } from './store/movies/actions'
+import { Routes } from './Routes'
 
 export interface ApplicationRootActions {
   onApplicationStart: () => void
@@ -20,6 +21,10 @@ export const ApplicationRoot = connectComponent(
       onApplicationStart()
     }, [])
 
-    return <h1>Hello World</h1>
+    return (
+      <div>
+        <Routes />
+      </div>
+    )
   }
 )
