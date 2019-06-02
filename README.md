@@ -1,6 +1,6 @@
 # west-end-shows
 
-Application showing West End Shows
+Application for West End shows listing
 
 # instalation
 
