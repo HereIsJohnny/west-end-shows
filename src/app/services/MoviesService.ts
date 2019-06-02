@@ -11,17 +11,17 @@ export interface MovieDto {
   image: string
 }
 
+export const mapDtoToMovies = (dto: MovieDto): Movie => ({
+  id: slugify(dto.title, { lower: true }),
+  title: dto.title,
+  description: dto.description,
+  imageSrc: dto.image,
+  location: dto.venue,
+})
+
 class MoviesServiceClass {
   public getMovies = (): Observable<Movie[]> =>
-    httpClient.getJSON<MovieDto[]>('/movies.json').pipe(map(dtos => dtos.map(this.mapDtoToMovies)))
-
-  private mapDtoToMovies = (dto: MovieDto): Movie => ({
-    id: slugify(dto.title, { lower: true }),
-    title: dto.title,
-    description: dto.description,
-    imageSrc: dto.image,
-    location: dto.venue,
-  })
+    httpClient.getJSON<MovieDto[]>('/movies.json').pipe(map(dtos => dtos.map(mapDtoToMovies)))
 }
 
 export const moviesService = new MoviesServiceClass()

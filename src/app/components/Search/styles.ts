@@ -9,7 +9,7 @@ export const styles = makeStyles((theme: Theme) =>
     title: {
       flexGrow: 1,
       display: 'none',
-      [theme.breakpoints.up('md')]: {
+      [theme.breakpoints.up('sm')]: {
         display: 'block',
       },
     },

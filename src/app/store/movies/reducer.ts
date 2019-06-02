@@ -19,7 +19,7 @@ const intialState: MoviesState = {
   byId: {},
 }
 
-const normalizeMovies = (movies: Movie[]): MoviesState =>
+export const normalizeMovies = (movies: Movie[]): MoviesState =>
   movies.reduce(
     (state, movie) => ({
       allIds: [...state.allIds, movie.id],

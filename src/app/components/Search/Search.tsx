@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import SearchIcon from '@material-ui/icons/Search'
 import React from 'react'
 import { styles } from './styles'
+import { Container } from '@material-ui/core'
 
 interface SearchProps {
   onChange: (event: string | null) => void
@@ -19,25 +20,27 @@ export const Search: React.FunctionComponent<SearchProps> = ({ onChange, query }
   return (
     <div className={classes.root}>
       <AppBar position='fixed'>
-        <Toolbar>
-          <Typography className={classes.title} variant='h6' noWrap>
-            West End Shows
-          </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+        <Container>
+          <Toolbar>
+            <Typography className={classes.title} variant='h6' noWrap>
+              West End Shows
+            </Typography>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder='Search…'
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                value={query || ''}
+                onChange={onSearchChange}
+              />
             </div>
-            <InputBase
-              placeholder='Search…'
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              value={query || ''}
-              onChange={onSearchChange}
-            />
-          </div>
-        </Toolbar>
+          </Toolbar>
+        </Container>
       </AppBar>
     </div>
   )
