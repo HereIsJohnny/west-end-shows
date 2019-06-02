@@ -1,4 +1,5 @@
 const path = require('path')
+const express = require('express')
 
 const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
@@ -17,7 +18,7 @@ const styledComponentsTransformer = createStyledComponentsTransformer()
 
 // const devEnvironmentAppConfig = require('./k8s/charts/route-manager-webapp/config/dev/config.json')
 
-const ENTRY_POINT = './src/index.tsx'
+const ENTRY_POINT = './src/app/index.tsx'
 const DEV_SERVER_PORT = 8000
 
 const getProgressPluginReporter = () =>
@@ -93,7 +94,7 @@ const createCommonConfig = isProd => ({
   },
   // prettier-ignore
   plugins: [
-    new HtmlWebpackPlugin({ template: './src/index.html' })
+    new HtmlWebpackPlugin({ template: './src/app/index.html' })
   ]
 })
 
@@ -114,6 +115,9 @@ const devConfig = {
     // proxy: {
     //   '/api': { target: 'xxx', changeOrigin: true },
     // },
+    setup(app) {
+      app.use('/api/', express.static(path.join(__dirname, 'src', 'mocks')))
+    },
   },
   plugins: [
     new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }),
