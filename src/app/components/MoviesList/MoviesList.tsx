@@ -12,15 +12,28 @@ import {
 import { useTheme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { Movie } from 'app/store/movies/reducer'
-import React from 'react'
+import Fuse from 'fuse.js'
+import React, { useMemo } from 'react'
+import { SEARCH_CONFIG } from '../Search/config'
 
-export const MoviesList: React.FunctionComponent<{ movies: Movie[] }> = ({ movies }) => (
-  <React.Fragment>
-    {movies.map(movie => (
-      <MovieCard key={movie.title} movie={movie} />
-    ))}
-  </React.Fragment>
-)
+interface MoviesListProps {
+  movies: Movie[]
+  searchQuery: string | null
+}
+
+export const MoviesList: React.FunctionComponent<MoviesListProps> = ({ movies, searchQuery }) => {
+  const filteredMovies = useMemo(
+    () => (searchQuery ? new Fuse(movies, SEARCH_CONFIG).search(searchQuery) : movies),
+    [movies, searchQuery]
+  )
+  return (
+    <Box mt={10}>
+      {filteredMovies.map(movie => (
+        <MovieCard key={movie.title} movie={movie} />
+      ))}
+    </Box>
+  )
+}
 
 const useStyles = makeStyles({
   button: {

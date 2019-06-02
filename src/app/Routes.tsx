@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
-import { MainPage } from './views/MainPage'
-import { MovieDetails } from './views/MovieDetails'
+import { MainPage } from './pages/MainPage'
+import { MovieDetails } from './pages/MovieDetails'
 
 export const Routes: React.FunctionComponent = () => (
   <Switch>

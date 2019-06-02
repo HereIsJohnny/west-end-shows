@@ -41,7 +41,9 @@
   "homepage": "https://github.com/HereIsJohnny/west-end-shows#readme",
   "dependencies": {
     "@material-ui/core": "^4.0.1",
+    "@material-ui/icons": "^4.0.1",
     "connected-react-router": "^6.4.0",
+    "fuse.js": "^3.4.5",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.8.8",

@@ -1,5 +1,4 @@
 import { CssBaseline, makeStyles } from '@material-ui/core'
-import Container from '@material-ui/core/Container'
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
@@ -32,12 +31,10 @@ export const ApplicationRoot = connectComponent(
     const classes = useStyles()
 
     return (
-      <React.Fragment>
+      <div className={classes.root}>
         <CssBaseline />
-        <Container className={classes.root}>
-          <Routes />
-        </Container>
-      </React.Fragment>
+        <Routes />
+      </div>
     )
   }
 )
