@@ -10,11 +10,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin')
-const createStyledComponentsTransformer = require('typescript-plugin-styled-components').default
 
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-
-const styledComponentsTransformer = createStyledComponentsTransformer()
 
 // const devEnvironmentAppConfig = require('./k8s/charts/route-manager-webapp/config/dev/config.json')
 
@@ -50,13 +47,6 @@ const createCommonConfig = isProd => ({
         ],
         exclude: [/node_modules/],
         use: [
-          // {
-          //   loader: 'thread-loader',
-          //   options: {
-          //     workers: require('os').cpus().length - (isProd ? 0 : 1), // leave 1 CPU for `fork-ts-checker-webpack-plugin` in development mode
-          //     poolTimeout: isProd ? 2000 : Infinity, // set this to Infinity in watch mode, see https://github.com/webpack-contrib/thread-loader
-          //   },
-          // },
           {
             loader: 'ts-loader',
             options: {
@@ -64,7 +54,6 @@ const createCommonConfig = isProd => ({
               // https://webpack.js.org/guides/build-performance/#typescript-loader
               transpileOnly: true,
               experimentalWatchApi: true,
-              getCustomTransformers: () => ({ before: [styledComponentsTransformer] }),
             },
           },
         ],
