@@ -23,7 +23,6 @@ export class HttpClientClass {
   }
 
   public getJSON<T>(url: string, headers?: object): Observable<T> {
-    console.log('getJSON', this.addBaseUrl(url))
     return ajax.getJSON(this.addBaseUrl(url), { ...this.getDefaultHeaders(), ...headers })
   }
 

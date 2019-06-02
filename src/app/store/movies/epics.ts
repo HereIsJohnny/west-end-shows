@@ -1,8 +1,8 @@
 import { moviesService } from 'app/services/MoviesService'
 import { Action } from 'redux'
 import { combineEpics } from 'redux-observable'
-import { from, Observable, of } from 'rxjs'
-import { filter, map, catchError, exhaustMap } from 'rxjs/operators'
+import { Observable, of } from 'rxjs'
+import { catchError, exhaustMap, filter, map } from 'rxjs/operators'
 import { getMovies } from './actions'
 
 const getMoviesEpic = (actions$: Observable<Action>) =>

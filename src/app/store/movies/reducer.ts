@@ -1,13 +1,13 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers'
 import { getMovies } from './actions'
-import slugify from 'slugify'
 
 export interface MoviesState {
-  allTitles: string[]
-  byTitle: Record<string, Movie>
+  allIds: string[]
+  byId: Record<string, Movie>
 }
 
 export interface Movie {
+  id: string
   title: string
   description: string
   imageSrc: string
@@ -15,21 +15,21 @@ export interface Movie {
 }
 
 const intialState: MoviesState = {
-  allTitles: [],
-  byTitle: {},
+  allIds: [],
+  byId: {},
 }
 
 const normalizeMovies = (movies: Movie[]): MoviesState =>
-  movies.reduce((state, movie) => {
-    const movieTitle = slugify(movie.title, { lower: true })
-    return {
-      allTitles: [...state.allTitles, movieTitle],
-      byTitle: {
-        ...state.byTitle,
-        [movieTitle]: movie,
+  movies.reduce(
+    (state, movie) => ({
+      allIds: [...state.allIds, movie.id],
+      byId: {
+        ...state.byId,
+        [movie.id]: movie,
       },
-    }
-  }, intialState)
+    }),
+    intialState
+  )
 
 export const moviesReducer = reducerWithInitialState(intialState).case(
   getMovies.done,
